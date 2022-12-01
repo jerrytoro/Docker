@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  webappvuejs:
+    hostname: webappvuejs
+    build: ./practicaFinalVue
+    ports:
+      - "80:80"
+  web:
+    build: ./MiUniversidad
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
