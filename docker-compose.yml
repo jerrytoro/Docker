@@ -1,11 +1,22 @@
 version: "3.7"
 services:
+  json-server:
+    container_name: json-server-container
+    image: json-server-image
+    build : ./practicaFinalVue/json
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./practicaFinalVue/json/db.json:/practicaFinalVue/data/db.json
+    command: json-server --watch /practicaFinalVue/data/db.json --host 0.0.0.0
   webappvuejs:
     hostname: webappvuejs
     build: ./practicaFinalVue
     ports:
       - "80:80"
-  web:
+    depends_on:
+      - json-server
+  django:
     build: ./MiUniversidad
     command: python manage.py runserver 0.0.0.0:8000
     ports:
